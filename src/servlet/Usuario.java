@@ -1,8 +1,10 @@
 package servlet;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -35,7 +37,7 @@ public class Usuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 
 		try {
 
@@ -58,6 +60,29 @@ public class Usuario extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("cadastro.jsp");
 				request.setAttribute("usuarios", daoUsuario.listar());
 				view.forward(request, response);
+			} else if (acao.equalsIgnoreCase("download")) {
+				Beanportfolio usuario = daoUsuario.consultar(user);
+				if(usuario != null) {
+					response.setHeader("Content-Disposition", "attachment;filename=arquivo." + usuario.getContentType().split("\\/")[1]);
+					
+					/*-----Converte a Base64 da imagem do banco para byte[]*/
+					byte [] imageFotoBytes = new Base64().decodeBase64(usuario.getFotoBase64());
+					
+					/*----Coloca os bytes em um objeto de entrada para processar----*/
+					InputStream is = new ByteArrayInputStream(imageFotoBytes);
+					
+					/*----Início da resposta para o navegador----*/
+					int read = 0;
+					byte[] bytes = new byte[1024];
+					OutputStream os = response.getOutputStream();
+					
+					while((read = is.read(bytes)) != -1) {
+						os.write(bytes, 0, read);
+					}
+					
+					os.flush();
+					os.close();
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
