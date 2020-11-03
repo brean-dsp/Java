@@ -84,6 +84,13 @@
 						<td><input type="file" name="foto" value="Foto"></td>
 					</tr>
 					
+					<!-- Campo inserido na aula 7 -->
+					<tr>
+						<td>CURRICULO:</td>
+						<td><input type="file" name="curriculo" value="curriculo"></td>
+					</tr>
+					<!-- Campo inserido na aula 7 -->
+					
 					<tr>
 						<td></td>
 						<td><input type="submit" value="Salvar"><input
@@ -101,6 +108,7 @@
 				<th>ID</th>
 				<th>LOGIN</th>
 				<th>FOTO</th>
+				<th>CURRICULO</th>
 				<th>NOME</th>
 				<th>CEP</th>
 				<th>RUA</th>
@@ -117,7 +125,8 @@
 					<tr>
 						<td style="width: 150px"><c:out value="${user.id}"></c:out></td>
 						<td style="width: 150px"><c:out value="${user.login}"></c:out></td>
-						<td><a href ="salvarUsuario?acao=download&user=${user.id}"><img src='<c:out value="${user.tempFotoUser}"></c:out>' alt="Imagem User" title="Imagem User" width="32px" height="32px" ></a></td>
+						<td><a href ="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img src='<c:out value="${user.tempFotoUser}"></c:out>' alt="Imagem User" title="Imagem User" width="32px" height="32px" ></a></td>
+						<td><a href ="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}">Curriculo</a></td>
 						<td><c:out value="${user.nome}"></c:out></td>
 						<td><c:out value="${user.cep}"></c:out></td>
 						<td><c:out value="${user.rua}"></c:out></td>

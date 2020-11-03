@@ -38,7 +38,6 @@ public class Usuario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 		try {
 
 			String acao = request.getParameter("acao");
@@ -62,24 +61,36 @@ public class Usuario extends HttpServlet {
 				view.forward(request, response);
 			} else if (acao.equalsIgnoreCase("download")) {
 				Beanportfolio usuario = daoUsuario.consultar(user);
-				if(usuario != null) {
-					response.setHeader("Content-Disposition", "attachment;filename=arquivo." + usuario.getContentType().split("\\/")[1]);
+				if (usuario != null) {
 					
-					/*-----Converte a Base64 da imagem do banco para byte[]*/
-					byte [] imageFotoBytes = new Base64().decodeBase64(usuario.getFotoBase64());
+					String contentType = "";
+					byte [] fileBytes = null;
 					
+					String tipo = request.getParameter("tipo");
+					
+					if(tipo.equalsIgnoreCase("imagem")) {
+						contentType = usuario.getContentType();
+						fileBytes = new Base64().decodeBase64(usuario.getFotoBase64());
+					}else if(tipo.equalsIgnoreCase("curriculo")) {
+						contentType = usuario.getContentTypeCurriculo();
+						fileBytes = new Base64().decodeBase64(usuario.getCurriculoBase64());
+					}
+					
+					response.setHeader("Content-Disposition",
+							"attachment;filename=arquivo." + contentType.split("\\/")[1]);
+
 					/*----Coloca os bytes em um objeto de entrada para processar----*/
-					InputStream is = new ByteArrayInputStream(imageFotoBytes);
-					
+					InputStream is = new ByteArrayInputStream(fileBytes);
+
 					/*----Início da resposta para o navegador----*/
 					int read = 0;
 					byte[] bytes = new byte[1024];
 					OutputStream os = response.getOutputStream();
-					
-					while((read = is.read(bytes)) != -1) {
+
+					while ((read = is.read(bytes)) != -1) {
 						os.write(bytes, 0, read);
 					}
-					
+
 					os.flush();
 					os.close();
 				}
@@ -95,10 +106,9 @@ public class Usuario extends HttpServlet {
 		super.doPut(req, resp);
 	}
 
-	
-	
-	//--------------- Recebe os dados informados no formulario de cadastro de Usúarios ------------//
-	
+	// --------------- Recebe os dados informados no formulario de cadastro de
+	// Usúarios ------------//
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -152,11 +162,30 @@ public class Usuario extends HttpServlet {
 					
 					Part imagemFoto = request.getPart("foto");
 					
-					String fotoBase64 = new Base64().encodeBase64String(converteStreamParaByte(imagemFoto.getInputStream()));
+					if(imagemFoto != null) {
 					
-					usuario.setFotoBase64(fotoBase64);
-					usuario.setContentType(imagemFoto.getContentType());
+						String fotoBase64 = new Base64().encodeBase64String(converteStreamParaByte(imagemFoto.getInputStream()));
+						
+						usuario.setFotoBase64(fotoBase64);
+						usuario.setContentType(imagemFoto.getContentType());
+					}
 					
+					/*----------- Processa PDF -----------------*/
+					try {
+						
+					
+					Part curriculoPdf = request.getPart("curriculo");
+					
+						if(curriculoPdf != null) {
+							
+							String curriculoBase64 = new Base64().encodeBase64String(converteStreamParaByte(curriculoPdf.getInputStream()));
+							
+							usuario.setCurriculoBase64(curriculoBase64);
+							usuario.setContentTypeCurriculo(curriculoPdf.getContentType());
+						}
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 					//-------------  Modelo que pode ser utilizado para upload de imagem --------------//
 					 
 					/*List<FileItem> fileItems = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
@@ -230,20 +259,19 @@ public class Usuario extends HttpServlet {
 		}
 
 	}
-	
-	
-	// ------------ Converte o fluxo de dados da imagem para um Array de Bytes ------------------- //
-	
-	private byte[] converteStreamParaByte(InputStream imagem) throws Exception{
-		
+
+	// ------------ Converte o fluxo de dados da imagem para um Array de Bytes
+	// ------------------- //
+
+	private byte[] converteStreamParaByte(InputStream imagem) throws Exception {
+
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		int reads = imagem.read();
 		while (reads != -1) {
 			baos.write(reads);
 			reads = imagem.read();
 		}
-		
-		
+
 		return baos.toByteArray();
 	}
 

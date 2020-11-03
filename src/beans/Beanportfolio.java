@@ -28,6 +28,13 @@ public class Beanportfolio {
 	
 	private String contentType;
 	
+	//--------------------------- Campos inseridos na aula 7
+	private String curriculoBase64;
+	
+	private String contentTypeCurriculo;
+	
+	//--------------------------- Campos inseridos na aula 7
+	
 	private String tempFotoUser;
 	
 
@@ -36,6 +43,26 @@ public class Beanportfolio {
 	// ---------------------------------------------------------
 
 
+	// --------- Campos inseridos na aula 7
+	
+	public void setCurriculoBase64(String curriculoBase64) {
+		this.curriculoBase64 = curriculoBase64;
+	}
+	
+	public String getCurriculoBase64() {
+		return curriculoBase64;
+	}
+	
+	public void setContentTypeCurriculo(String contentTypeCurriculo) {
+		this.contentTypeCurriculo = contentTypeCurriculo;
+	}
+	
+	public String getContentTypeCurriculo() {
+		return contentTypeCurriculo;
+	}
+	
+	// ------------ campos inseridos na aula 7
+	
 	public String getTempFotoUser() {
 		
 		tempFotoUser = "data:" + contentType + ";base64," + fotoBase64;

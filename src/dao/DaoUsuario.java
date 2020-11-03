@@ -22,7 +22,7 @@ public class DaoUsuario {
 
 		try {
 
-			String sql = "insert into usuario(login, senha, nome, telefone, cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into usuario(login, senha, nome, telefone, cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype, curriculobase64, contenttypecurriculo) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, usuario.getLogin());
 			insert.setString(2, usuario.getSenha());
@@ -36,6 +36,8 @@ public class DaoUsuario {
 			insert.setString(10, usuario.getIbge());
 			insert.setString(11, usuario.getFotoBase64());
 			insert.setString(12, usuario.getContentType());
+			insert.setString(13, usuario.getCurriculoBase64());
+			insert.setString(14, usuario.getContentTypeCurriculo());
 			insert.execute();
 			connection.commit();
 
@@ -74,6 +76,8 @@ public class DaoUsuario {
 			beanPortfolio.setIbge(resultSet.getString("ibge"));
 			beanPortfolio.setFotoBase64(resultSet.getString("fotobase64"));
 			beanPortfolio.setContentType(resultSet.getString("contenttype"));
+			beanPortfolio.setCurriculoBase64(resultSet.getString("curriculobase64"));
+			beanPortfolio.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
 			
 			
 
@@ -126,6 +130,8 @@ public class DaoUsuario {
 			beanPortfolio.setIbge(resultSet.getString("ibge"));
 			beanPortfolio.setFotoBase64(resultSet.getString("fotobase64"));
 			beanPortfolio.setContentType(resultSet.getString("contenttype"));
+			beanPortfolio.setCurriculoBase64(resultSet.getString("curriculobase64"));
+			beanPortfolio.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
 
 			return beanPortfolio;
 		}
