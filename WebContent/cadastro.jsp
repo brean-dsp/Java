@@ -29,7 +29,8 @@
 	</center>
 
 	<form action="salvarUsuario" method="post" id="formUser"
-		onsubmit="return validarCampos() ? true : false;" enctype="multipart/form-data">
+		onsubmit="return validarCampos() ? true : false;"
+		enctype="multipart/form-data">
 		<ul class="form-style-1">
 			<li>
 				<table>
@@ -39,7 +40,8 @@
 							value="${user.id}"></td>
 						<td>CEP:</td>
 						<td><input type="text" id="cep" name="cep"
-							onblur="consultaCep();" value="${user.cep}" placeholder="Informe cep"></td>
+							onblur="consultaCep();" value="${user.cep}"
+							placeholder="Informe cep"></td>
 					</tr>
 					<tr>
 						<td>LOGIN:</td>
@@ -47,7 +49,7 @@
 							value="${user.login}" placeholder="Informe o login"></td>
 						<td>RUA:</td>
 						<td><input type="text" id="rua" name="rua"
-							value="${user.rua}"placeholder="Informe a rua"></td>
+							value="${user.rua}" placeholder="Informe a rua"></td>
 					</tr>
 					<tr>
 						<td>SENHA:</td>
@@ -78,19 +80,27 @@
 						<td><input type="text" id="ibge" name="ibge"
 							value="${user.ibge}" placeholder="Informe o IBGE"></td>
 					</tr>
-					
+
 					<tr>
 						<td>FOTO:</td>
-						<td><input type="file" name="foto" value="Foto"></td>
+						<td><input type="file" name="foto" value="Foto"> <input
+							type="text" style="display: none;" name="fotoTemp"
+							readonly="readonly" value="${user.fotoBase64}" /> <input
+							type="text" style="display: none;" name="contentTypeTemp"
+							readonly="readonly" value="${user.contentType}" /></td>
 					</tr>
-					
+
 					<!-- Campo inserido na aula 7 -->
 					<tr>
 						<td>CURRICULO:</td>
-						<td><input type="file" name="curriculo" value="curriculo"></td>
+						<td><input type="file" name="curriculo" value="curriculo">
+							<input type="text" style="display: none;" name="curriculoTemp"
+							readonly="readonly" value="${user.curriculoBase64}" /> <input
+							type="text" style="display: none;" name="curriculoContentTypeTemp"
+							readonly="readonly" value="${user.contentTypeCurriculo}" /></td>
 					</tr>
 					<!-- Campo inserido na aula 7 -->
-					
+
 					<tr>
 						<td></td>
 						<td><input type="submit" value="Salvar"><input
@@ -125,8 +135,12 @@
 					<tr>
 						<td style="width: 150px"><c:out value="${user.id}"></c:out></td>
 						<td style="width: 150px"><c:out value="${user.login}"></c:out></td>
-						<td><a href ="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img src='<c:out value="${user.tempFotoUser}"></c:out>' alt="Imagem User" title="Imagem User" width="32px" height="32px" ></a></td>
-						<td><a href ="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}">Curriculo</a></td>
+						<td><a
+							href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img
+								src='<c:out value="${user.tempFotoUser}"></c:out>'
+								alt="Imagem User" title="Imagem User" width="32px" height="32px"></a></td>
+						<td><a
+							href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}">Curriculo</a></td>
 						<td><c:out value="${user.nome}"></c:out></td>
 						<td><c:out value="${user.cep}"></c:out></td>
 						<td><c:out value="${user.rua}"></c:out></td>
