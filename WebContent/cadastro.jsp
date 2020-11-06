@@ -146,13 +146,17 @@
 									height="32px"></a></td>
 						</c:if>
 						<c:if test="${user.fotoBase64.isEmpty() == true}">
-							<td><img alt="Imagem User" src="resources/img/usuario.png" width="32px" height="32px" ></td>
+							<td><img alt="Imagem User" src="resources/img/usuario.png" width="32px" height="32px" onclick="alert('Não possui imagem')"></td>
 						</c:if>
 
 						<!-- Melhorando o link de curriculo inserindo uma imagem -->
+						<c:if test="${user.curriculoBase64.isEmpty() == false}">
 						<td><a
 							href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img alt="Curriculo" src="resources/img/pdfimg.png" width="32px" height="32px"></a></td>
-							
+						</c:if>
+						<c:if test="${user.curriculoBase64.isEmpty() == true}">
+						<td><img alt="Curriculo" src="resources/img/pdfimg.png" width="32px" height="32px" onclick="alert('Não possui curiculo')"></td>
+						</c:if>
 							
 						<td><c:out value="${user.nome}"></c:out></td>
 						<td><c:out value="${user.cep}"></c:out></td>
