@@ -96,8 +96,9 @@
 						<td><input type="file" name="curriculo" value="curriculo">
 							<input type="text" style="display: none;" name="curriculoTemp"
 							readonly="readonly" value="${user.curriculoBase64}" /> <input
-							type="text" style="display: none;" name="curriculoContentTypeTemp"
-							readonly="readonly" value="${user.contentTypeCurriculo}" /></td>
+							type="text" style="display: none;"
+							name="curriculoContentTypeTemp" readonly="readonly"
+							value="${user.contentTypeCurriculo}" /></td>
 					</tr>
 					<!-- Campo inserido na aula 7 -->
 
@@ -135,10 +136,20 @@
 					<tr>
 						<td style="width: 150px"><c:out value="${user.id}"></c:out></td>
 						<td style="width: 150px"><c:out value="${user.login}"></c:out></td>
-						<td><a
-							href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img
-								src='<c:out value="${user.tempFotoUser}"></c:out>'
-								alt="Imagem User" title="Imagem User" width="32px" height="32px"></a></td>
+
+						<!-- Início da Condição para  mostrar imagem padrão caso o usuario nao tenha inserido ou editado uma imagem no formulario-->
+						<c:if test="${user.fotoBase64.isEmpty() == false}">
+							<td><a
+								href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img
+									src='<c:out value="${user.tempFotoUser}"></c:out>'
+									alt="Imagem User" title="Imagem User" width="32px"
+									height="32px"></a></td>
+						</c:if>
+						<c:if test="${user.fotoBase64.isEmpty() == true}">
+							<td><img alt="Imagem User" src="resources/img/usuario.png" width="32px" height="32px" ></td>
+						</c:if>
+
+
 						<td><a
 							href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}">Curriculo</a></td>
 						<td><c:out value="${user.nome}"></c:out></td>
