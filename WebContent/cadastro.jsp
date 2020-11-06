@@ -149,9 +149,11 @@
 							<td><img alt="Imagem User" src="resources/img/usuario.png" width="32px" height="32px" ></td>
 						</c:if>
 
-
+						<!-- Melhorando o link de curriculo inserindo uma imagem -->
 						<td><a
-							href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}">Curriculo</a></td>
+							href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img alt="Curriculo" src="resources/img/pdfimg.png" width="32px" height="32px"></a></td>
+							
+							
 						<td><c:out value="${user.nome}"></c:out></td>
 						<td><c:out value="${user.cep}"></c:out></td>
 						<td><c:out value="${user.rua}"></c:out></td>
