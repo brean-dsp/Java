@@ -44,7 +44,6 @@ public class Telefones extends HttpServlet {
 
 			RequestDispatcher view = request.getRequestDispatcher("telefones.jsp");
 			request.setAttribute("telefones", daoTelefones.listar(usuario.getId()));
-			request.setAttribute("msg", "Cadastro salvo com sucesso!");
 			view.forward(request, response);
 			
 			}else if(acao.equals("deleteFone")) {
