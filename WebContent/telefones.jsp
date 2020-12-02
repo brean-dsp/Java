@@ -41,7 +41,7 @@
 					<td>NÚMERO</td>
 					<td><input type="text" id="numero" name="numero" ></td>
 					<td>
-					<select id="tipo" name="tipo">
+					<select id="tipo" name="tipo" style="width: 173px">
 						<option>Casa</option>
 						<option>Contato</option>
 						<option>Celular</option>
@@ -51,8 +51,8 @@
 
 					<tr>
 						<td></td>
-						<td><input type="submit" value="Salvar"></td>
-						<td><input type="submit" value="Voltar" onclick="document.getElementById('formUser').action = 'salvarTelefones?acao=voltar'"></td>
+						<td><input type="submit" value="Salvar" style="width: 173px"></td>
+						<td><input type="submit" value="Voltar" style="width: 173px" onclick="document.getElementById('formUser').action = 'salvarTelefones?acao=voltar'"></td>
 					</tr>
 				</table>
 			</li>

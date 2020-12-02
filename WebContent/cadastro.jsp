@@ -104,9 +104,9 @@
 
 					<tr>
 						<td></td>
-						<td><input type="submit" value="Salvar"><input
-							type="submit" value="Cancelar"
-							onclick="document.getElementById('formUser').action='salvarUsuario?acao=reset'"></td>
+						<td><input type="submit" value="Salvar" style="width: 173px"></td>
+						<td></td>
+						<td><input type="submit" value="Cancelar" style="width: 173px" onclick="document.getElementById('formUser').action='salvarUsuario?acao=reset'"></td>
 					</tr>
 				</table>
 			</li>
