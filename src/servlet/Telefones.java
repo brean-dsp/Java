@@ -73,22 +73,44 @@ public class Telefones extends HttpServlet {
 
 		String numero = request.getParameter("numero");
 		String tipo = request.getParameter("tipo");
-
-		BeanTelefone beanTelefone = new BeanTelefone();
-		beanTelefone.setNumero(numero);
-		beanTelefone.setTipo(tipo);
-		beanTelefone.setUsuario(beanPortfolio.getId());
 		
+		String acao = request.getParameter("acao");
 		
-		daoTelefones.salvar(beanTelefone);
+		if(acao == null || (acao != null && !acao.equalsIgnoreCase("voltar"))) {
+			
 		
-		request.getSession().setAttribute("userEscolhido", beanPortfolio);
-		request.setAttribute("userEscolhido", beanPortfolio);
+		if(numero == null || (numero != null && numero.isEmpty())) {
+			
+			RequestDispatcher view = request.getRequestDispatcher("telefones.jsp");
+			request.setAttribute("telefones", daoTelefones.listar(beanPortfolio.getId()));
+			request.setAttribute("msg", "Informe o número do telefone!");
+			view.forward(request, response);
+			
+		}else {
+	
+			BeanTelefone beanTelefone = new BeanTelefone();
+			beanTelefone.setNumero(numero);
+			beanTelefone.setTipo(tipo);
+			beanTelefone.setUsuario(beanPortfolio.getId());
+			
+			
+			daoTelefones.salvar(beanTelefone);
+			
+			request.getSession().setAttribute("userEscolhido", beanPortfolio);
+			request.setAttribute("userEscolhido", beanPortfolio);
+			
+			RequestDispatcher view = request.getRequestDispatcher("telefones.jsp");
+			request.setAttribute("telefones", daoTelefones.listar(beanPortfolio.getId()));
+			request.setAttribute("msg", "Cadastro salvo com sucesso!");
+			view.forward(request, response);
 		
-		RequestDispatcher view = request.getRequestDispatcher("telefones.jsp");
-		request.setAttribute("telefones", daoTelefones.listar(beanPortfolio.getId()));
-		request.setAttribute("msg", "Cadastro salvo com sucesso!");
-		view.forward(request, response);
+		}
+		
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("cadastro.jsp");
+			request.setAttribute("usuarios", daoUsuario.listar());
+			view.forward(request, response);
+		}
 		
 		}catch (Exception e) {
 			e.printStackTrace();

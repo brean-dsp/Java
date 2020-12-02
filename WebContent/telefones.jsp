@@ -24,7 +24,7 @@
 	</center>
 
 	<form action="salvarTelefones" method="post" id="formUser"
-		onsubmit="return validarCampos() ? true : false;">
+		>
 		<ul class="form-style-1">
 			<li>
 				<table>
@@ -52,6 +52,7 @@
 					<tr>
 						<td></td>
 						<td><input type="submit" value="Salvar"></td>
+						<td><input type="submit" value="Voltar" onclick="document.getElementById('formUser').action = 'salvarTelefones?acao=voltar'"></td>
 					</tr>
 				</table>
 			</li>
