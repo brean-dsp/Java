@@ -41,31 +41,31 @@
 						<td>CEP:</td>
 						<td><input type="text" id="cep" name="cep"
 							onblur="consultaCep();" value="${user.cep}"
-							placeholder="Informe cep"></td>
+							placeholder="Informe cep" maxlength="10"></td>
 					</tr>
 					<tr>
 						<td>LOGIN:</td>
 						<td><input type="text" id="login" name="login"
-							value="${user.login}" placeholder="Informe o login"></td>
+							value="${user.login}" placeholder="Informe o login" maxlength="10"></td>
 						<td>RUA:</td>
 						<td><input type="text" id="rua" name="rua"
-							value="${user.rua}" placeholder="Informe a rua"></td>
+							value="${user.rua}" placeholder="Informe a rua" maxlength="50"></td>
 					</tr>
 					<tr>
 						<td>SENHA:</td>
 						<td><input type="password" id="senha" name="senha"
-							value="${user.senha}" placeholder="Informe a senha"></td>
+							value="${user.senha}" placeholder="Informe a senha" maxlength="10"></td>
 						<td>BAIRRO:</td>
 						<td><input type="text" id="bairro" name="bairro"
-							value="${user.bairro}" placeholder="Informe o bairro "></td>
+							value="${user.bairro}" placeholder="Informe o bairro " maxlength="50"></td>
 					</tr>
 					<tr>
 						<td>NOME:</td>
 						<td><input type="text" id="nome" name="nome"
-							value="${user.nome}" placeholder="Informe o nome"></td>
+							value="${user.nome}" placeholder="Informe o nome" maxlength="50"></td>
 						<td>CIDADE:</td>
 						<td><input type="text" id="cidade" name="cidade"
-							value="${user.cidade}" placeholder="Informe a cidade"></td>
+							value="${user.cidade}" placeholder="Informe a cidade" maxlength="50"></td>
 					</tr>
 					<tr>
 						<td>TELEFONE:</td>
@@ -78,7 +78,7 @@
 					<tr>
 						<td>IBGE:</td>
 						<td><input type="text" id="ibge" name="ibge"
-							value="${user.ibge}" placeholder="Informe o IBGE"></td>
+							value="${user.ibge}" placeholder="Informe o IBGE" maxlength="20"></td>
 					</tr>
 
 					<tr>
