@@ -35,17 +35,17 @@
 					<tr>
 						<td>NOME:</td>
 						<td><input type="text" id="nome" name="nome"
-							value="${prod.nome}" placeholder="Informe o nome do produto"></td>
+							value="${prod.nome}" placeholder="Informe o nome do produto" maxlength="100"></td>
 					</tr>
 					<tr>
 						<td>QUANTIDADE:</td>
-						<td><input type="text" id="quantidade" name="quantidade"
-							value="${prod.quantidade}" placeholder="Informe a quantidade"></td>
+						<td><input type="number" id="quantidade" name="quantidade"
+							value="${prod.quantidade}" placeholder="Informe a quantidade" maxlength="10"></td>
 					</tr>
 					<tr>
 						<td>VALOR R$:</td>
 						<td><input type="text" id="valor" name="valor"
-							value="${prod.valor}" placeholder="Informe o valor"></td>
+							value="${prod.valor}" placeholder="Informe o valor" maxlength="12"></td>
 					</tr>
 					<tr>
 						<td></td>

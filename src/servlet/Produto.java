@@ -113,7 +113,10 @@ public class Produto extends HttpServlet {
 				}
 
 				if (valor != null && !valor.isEmpty()) {
-					produto.setValor(Double.parseDouble(valor));
+					
+					String valorParse = valor.replaceAll("\\.", "");// Para números grandes tipo 10.500,00
+					valorParse = valorParse.replaceAll("\\,", "."); //substitui vírgula ',' por ponto '.'	ficando 10500.20
+					produto.setValor(Double.parseDouble(valorParse));
 				}
 
 				if (msg != null) {
